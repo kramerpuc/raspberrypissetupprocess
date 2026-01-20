@@ -37,4 +37,4 @@ Then, ensure you are within the /opt/dockge/ directory, and use wget to download
 Dockge operates on port 5001.
 
 The last step on the Raspberry Pi is to use "docker compose up -d" for docker to download the DockGe container and start it up.  
-After giving Docker sometime to start it up, we can visit https://<IPADDRESS>:5001/ and start configuring docker
+After giving Docker sometime to start it up, we can visit https:// IPADDRESS :5001/ and start configuring docker
