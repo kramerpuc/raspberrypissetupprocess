@@ -91,5 +91,7 @@ services:
 
 Set a custom password and change your time zone, paste in the compose.yaml, and deploy.
 
+Go ahead and try to access Pihole, use the same http:// IPADDRESS :82 or whatever port you used
+
 **Step 6. PowerDNS**
 
