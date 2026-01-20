@@ -37,4 +37,11 @@ Then, ensure you are within the /opt/dockge/ directory, and use wget to download
 Dockge operates on port 5001.
 
 The last step on the Raspberry Pi is to use "docker compose up -d" for docker to download the DockGe container and start it up.  
-After giving Docker sometime to start it up, we can visit https:// IPADDRESS :5001/ and start configuring docker
+After giving Docker sometime to start it up, we can visit https:// IPADDRESS :5001/ and sign in.
+
+DockGe is still a bit confusing to me.  to my understanding, you make a docker compose file, put it in the compose category, and then deploy. It is really simple to get running, and really simple to edit after you understand docker a bit.  
+
+**Step 5. Pihole**
+
+Pihole is a DNS FTL that blocks ads at a network level.  We can use it in conjunction with a local DNS to keep everything local, and in my set up, I run 2 computers with Pihole and PowerDNS for redundancy.  One downside of Pihole is that when the computer running it goes down, the network goes down, so redundancy is necessary.  
+
