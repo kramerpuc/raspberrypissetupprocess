@@ -139,3 +139,11 @@ services:
 It will through some errors, but this is because we haven't configured the SQL yet. 
 
 Use curl -o schema.sql https://raw.githubusercontent.com/PowerDNS/pdns/master/modules/gmysqlbackend/schema.mysql.sql and restart the DNS.
+
+Then: 
+
+docker exec -i powerdns-db \
+  mariadb -upowerdns -ppowerdnspassword powerdns < schema.sql
+
+docker restart powerdns
+
