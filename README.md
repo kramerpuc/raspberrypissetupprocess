@@ -95,3 +95,47 @@ Go ahead and try to access Pihole, use the same http:// IPADDRESS :82 or whateve
 
 **Step 6. PowerDNS**
 
+Create a new stack on DockGe, then in the compose.yaml, past this
+
+services:
+  db:
+    image: mariadb:11
+    container_name: powerdns-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: powerdns
+      MYSQL_USER: powerdns
+      MYSQL_PASSWORD: powerdnspassword
+    volumes:
+      - ./db:/var/lib/mysql
+
+  pdns:
+    image: powerdns/pdns-auth-48
+    container_name: powerdns
+    depends_on:
+      - db
+    restart: unless-stopped
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+      - "8081:8081"
+    environment:
+      PDNS_AUTH_API_KEY: supersecretapikey
+    command: >
+      --config-dir=/dev/null
+      --launch=gmysql
+      --gmysql-host=db
+      --gmysql-dbname=powerdns
+      --gmysql-user=powerdns
+      --gmysql-password=powerdnspassword
+      --api=yes
+      --api-key=supersecretapikey
+      --webserver=yes
+      --webserver-address=0.0.0.0
+      --webserver-port=8081
+      --webserver-allow-from=0.0.0.0/0
+
+It will through some errors, but this is because we haven't configured the SQL yet. 
+
+Use curl -o schema.sql https://raw.githubusercontent.com/PowerDNS/pdns/master/modules/gmysqlbackend/schema.mysql.sql and restart the DNS.
